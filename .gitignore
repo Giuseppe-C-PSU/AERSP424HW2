@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Json files
+*.json
+
+# Ignore the build directory
+*build
