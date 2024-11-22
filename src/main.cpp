@@ -1,4 +1,4 @@
-// Main cpp file for the entire project: p
+// Main cpp file for the entire project:
 
 
 #include "q1.h"
@@ -9,7 +9,7 @@
 #include <thread>
 #include <memory>
 
-
+using namespace std;
 
 int main(){
 
@@ -45,20 +45,22 @@ int main(){
     cout << "#################################" << endl;
     
     // Create an array of five mutexes, each representing a tool
-    std::mutex tools[5];
-    // Create a vector to hold the robot threads
-    std::vector<std::thread> robots;
+    mutex tools[5];
+    // Create a vector to hold the ranger threads
+    vector<thread> rangers;
+    // Assigns colors to the Rangers
+    string colors[5] = {"Red", "Blue", "Yellow", "Pink", "Black"}
 
-    // Loop to create and start five robot threads
+    // Loop to create and start five ranger threads
     for (int i = 0; i < 5; ++i) {
-        // Create a new robot with its ID and references to two adjacent tools, then start its performTask method in a new thread
-        robots.emplace_back(&Robot::performTask, Robot(i, tools[i], tools[(i + 1) % 5]));
+        // Create a new ranger with its corresponding color and references to two adjacent tools, then start its performTask method in a new thread
+        rangers.emplace_back(&Ranger::performTask, Ranger(colors[i], tools[i], tools[(i + 1) % 5]));
     }
 
-    // Loop to join all robot threads
-    for (auto& robot : robots) {
+    // Loop to join all ranger threads
+    for (auto& ranger : rangers) {
         // Wait for the thread to finish execution
-        robot.join();
+        ranger.join();
     }
     cout << "#################################" << endl;
     cout << "END OF QUESTION 2" << endl;
