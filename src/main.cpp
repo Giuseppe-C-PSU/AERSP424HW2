@@ -36,13 +36,14 @@ int main(){
     cout << "#################################" << endl;
     cout << "END OF QUESTION 1" << endl;
     cout << "#################################" << endl;
-    return 0;
 
 
 
     cout << "#################################" << endl;
     cout << "START OF QUESTION 2" << endl;
     cout << "#################################" << endl;
+
+    
 // Create an array of five mutexes, each representing a tool
     std::mutex tools[5];
     // Create a vector to hold the robot threads
