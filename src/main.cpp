@@ -2,10 +2,11 @@
 
 
 #include "q1.h"
+#include "q2.h"
+#include "airport_simulation.h"
 #include <iostream>
 #include <vector>
 #include <thread>
-#include "airport_simulation.h"
 #include <memory>
 
 
@@ -38,6 +39,31 @@ int main(){
     cout << "END OF QUESTION 1" << endl;
     cout << "#################################" << endl;
 
+
+    cout << "#################################" << endl;
+    cout << "START OF QUESTION 2" << endl;
+    cout << "#################################" << endl;
+    
+    // Create an array of five mutexes, each representing a tool
+    std::mutex tools[5];
+    // Create a vector to hold the robot threads
+    std::vector<std::thread> robots;
+
+    // Loop to create and start five robot threads
+    for (int i = 0; i < 5; ++i) {
+        // Create a new robot with its ID and references to two adjacent tools, then start its performTask method in a new thread
+        robots.emplace_back(&Robot::performTask, Robot(i, tools[i], tools[(i + 1) % 5]));
+    }
+
+    // Loop to join all robot threads
+    for (auto& robot : robots) {
+        // Wait for the thread to finish execution
+        robot.join();
+    }
+    cout << "#################################" << endl;
+    cout << "END OF QUESTION 2" << endl;
+    cout << "#################################" << endl;
+    
     cout << "#################################" << endl;
     cout << "START OF QUESTION 3" << endl;
     cout << "#################################" << endl;
@@ -75,9 +101,9 @@ int main(){
 
     cout << "#################################" << endl;
     cout << "END OF QUESTION 3" << endl;
-    cout << "#################################" << endl;
-
+    cout << "#################################" << endl;    
 
     return 0;
-    
 }
+    
+
