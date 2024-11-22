@@ -3,9 +3,11 @@
 
 #include "q1.h"
 #include "q2.h"
+#include "airport_simulation.h"
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <memory>
 
 
 
@@ -38,13 +40,11 @@ int main(){
     cout << "#################################" << endl;
 
 
-
     cout << "#################################" << endl;
     cout << "START OF QUESTION 2" << endl;
     cout << "#################################" << endl;
-
     
-// Create an array of five mutexes, each representing a tool
+    // Create an array of five mutexes, each representing a tool
     std::mutex tools[5];
     // Create a vector to hold the robot threads
     std::vector<std::thread> robots;
@@ -63,6 +63,46 @@ int main(){
     cout << "#################################" << endl;
     cout << "END OF QUESTION 2" << endl;
     cout << "#################################" << endl;
+    
+    cout << "#################################" << endl;
+    cout << "START OF QUESTION 3" << endl;
+    cout << "#################################" << endl;
+
+    // Question 3
+
+    int totalAircraft = 10;
+    int firstBatchSize = 2;
+    AirportSimulation airport(totalAircraft);
+
+    // Create a thread for ATC communication
+    std::thread atcThread(&AirportSimulation::atcCommunication, &airport);
+
+    // Create first batch of 2 aircraft
+    for (int i = 1; i <= firstBatchSize; ++i) {
+        auto aircraft = std::make_shared<Aircraft>(i);
+        std::thread(&AirportSimulation::incomingAircraft, &airport, aircraft).detach();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Simulate aircraft arrival time
+    }
+
+    // Wait for 5 seconds before creating the next batch
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+
+    // Create second batch of 8 aircraft
+    for (int i = firstBatchSize + 1; i <= totalAircraft; ++i) {
+        auto aircraft = std::make_shared<Aircraft>(i);
+        std::thread(&AirportSimulation::incomingAircraft, &airport, aircraft).detach();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Simulate aircraft arrival time
+    }
+
+    // Wait for all aircraft to be processed
+    atcThread.join();
+
+
+
+    cout << "#################################" << endl;
+    cout << "END OF QUESTION 3" << endl;
+    cout << "#################################" << endl;    
+
     return 0;
 }
     
