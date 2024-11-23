@@ -21,7 +21,7 @@ void IMU::processData() {
 void ADS::gatherData() {
     cout << "Gathering data from the ADS sensor" << endl;
 };
-
+ //dfsg
 void ADS::processData() {
     cout << "Processing data from the ADS sensor" << endl;
 };

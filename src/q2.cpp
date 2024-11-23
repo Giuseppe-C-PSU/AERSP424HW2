@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-
+//sdg
 // Constructor to initialize the robot with an ID and references to two mutexes representing the tools
 Robot::Robot(int id, std::mutex& leftTool, std::mutex& rightTool)
     : id(id), leftTool(leftTool), rightTool(rightTool) {}

@@ -11,7 +11,7 @@ int Aircraft::getId() const {
 
 AirportSimulation::AirportSimulation(int totalAircraft)
         : atcBusy(false), aircraftCount(0), processedAircraft(0), totalAircraft(totalAircraft) {}
-
+//sdfsdf
 void AirportSimulation::incomingAircraft(std::shared_ptr<Aircraft> aircraft) {
     std::unique_lock<std::mutex> lock(mtx);
     if (aircraftCount < 3) {

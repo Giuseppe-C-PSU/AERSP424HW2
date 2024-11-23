@@ -27,8 +27,10 @@ file(GLOB all_SRCS
     "${PROJECT_SOURCE_DIR}/src/*.c"
 )
 
-# Create a binary file. 
+# Create a binary file.
+
 # The first argument is the name of the binary file.
+#sdf
 # It can be anything. In this case, it is set to be the project name.
 # The other arguments are source files.
 # Header files are not needed in add_executable(), assuming they are properly included.

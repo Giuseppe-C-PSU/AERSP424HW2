@@ -62,7 +62,7 @@ void transfer_orbit()
                                        { return (a*(1-pow(e,2)))/(1+e*cos(x));; });
     vector<double> t_orbit = transform(d_delf, [aMin, t_e](auto x)
                                        { return (aMin*(1-pow(t_e,2)))/(1+t_e*cos(x));; });
-
+//sdg
     polarplot(d_delf, d_orbit, "c");
     hold(on);
     polarplot(a_delf, a_orbit, "m");
