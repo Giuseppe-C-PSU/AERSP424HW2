@@ -3,37 +3,31 @@
 #include <thread>
 #include <chrono>
 
-using namespace std;
+// Constructor to initialize the robot with an ID and references to two mutexes representing the tools
+Robot::Robot(int id, std::mutex& leftTool, std::mutex& rightTool)
+    : id(id), leftTool(leftTool), rightTool(rightTool) {}
 
-// Constructor to initialize a Ranger with a color and references to two mutexes representing the tools
-Ranger::Ranger(const string& color, mutex& leftTool, mutex& rightTool)
-    : color(color), leftTool(leftTool), rightTool(rightTool), taskCount(0) {}
-
-// Method where the ranger performs its tasks until they each complete the task 4 times
-void Ranger::performTask() {
-    while (taskCount < 4) { //Ends the Loop after each robot completes 4 tasks
-
+// Method where the robot performs its task in an infinite loop
+void Robot::performTask() {
+    while (true) {
         // Create unique locks for the left and right tools but do not lock them immediately
-        unique_lock<mutex> lockLeft(leftTool, defer_lock);
-        unique_lock<mutex> lockRight(rightTool, defer_lock);
+        std::unique_lock<std::mutex> lockLeft(leftTool, std::defer_lock);
+        std::unique_lock<std::mutex> lockRight(rightTool, std::defer_lock);
 
         // Lock both mutexes simultaneously to avoid deadlock
-        lock(lockLeft, lockRight);
+        std::lock(lockLeft, lockRight);
 
-        // Print a message indicating the Ranger is grabbing the tools
-        cout << "The " << color << " Ranger is grabbing tools.\n";
+        // Print a message indicating the robot is grabbing the tools
+        std::cout << "Robot " << id << " is grabbing tools.\n";
         // Simulate the time taken to grab the tools
-        this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 
-        // Print a message indicating the Ranger is performing the task
-        cout << "The " << color << " Ranger is performing the task.\n";
+        // Print a message indicating the robot is performing the task
+        std::cout << "Robot " << id << " is performing the task.\n";
         // Simulate the time taken to perform the task
-        this_thread::sleep_for(std::chrono::seconds(5));
+        std::this_thread::sleep_for(std::chrono::seconds(5));
 
-        // Print a message indicating the Ranger has completed the task and released the tools
-        cout << "The " << color << " Ranger has completed the task and released the tools.\n";
-
-        //Increment task counter
-        ++taskCount;
+        // Print a message indicating the robot has completed the task and released the tools
+        std::cout << "Robot " << id << " has completed the task and released the tools.\n";
     }
 }
