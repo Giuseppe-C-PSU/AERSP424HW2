@@ -14,7 +14,11 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
 )
 
-add_subdirectory(third_party/matplotplusplus)
+# add_subdirectory(third_party/matplotplusplus)
+
+list(APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}/third_party/matplotplusplus/install")
+find_package(Matplot++ REQUIRED)
+include(GNUInstallDirs)
 
 file(GLOB all_SRCS
     "${PROJECT_SOURCE_DIR}/include/*.h"
@@ -30,5 +34,7 @@ file(GLOB all_SRCS
 # Header files are not needed in add_executable(), assuming they are properly included.
 add_executable(${CMAKE_PROJECT_NAME} ${all_SRCS})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC matplot)
+# target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC matplot)
+target_link_libraries(${CMAKE_PROJECT_NAME} Matplot++::matplot)
+
 # target_link_libraries(${CMAKE_PROJECT_NAME} m)
