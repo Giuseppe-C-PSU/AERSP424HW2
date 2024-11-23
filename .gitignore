@@ -36,3 +36,5 @@
 
 # Ignore the build directory
 *build
+third_party
+
