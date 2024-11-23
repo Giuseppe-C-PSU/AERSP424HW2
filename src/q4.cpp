@@ -9,13 +9,7 @@ using namespace matplot;
 
 // Plotting Transfer orbit because why the fuck not
 
-vector<double> r(const int a, const int e, vector<double>& f, const int mu){
-    vector<double> radius;
-    for(int i = 0; i < f.size(); i++){
-        radius[i] = (a*(1-e^2))/(1+e*cos(f[i]));
-    }
-    return radius;
-};
+
 
 double p_calc(int r1,int r2,double aMin, double f1, double f2, double delf){
     if (delf == 0){
