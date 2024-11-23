@@ -2,16 +2,20 @@
 #define Q2_H
 
 #include <mutex>
+#include <string>
 
-class Robot {
+using namespace std;
+
+class Ranger {
 public:
-    Robot(int id, std::mutex& leftTool, std::mutex& rightTool);
+    Ranger(const string& color, mutex& leftTool, mutex& rightTool);
     void performTask();
 
 private:
-    int id;
-    std::mutex& leftTool;
-    std::mutex& rightTool;
+    string color;
+    mutex& leftTool;
+    mutex& rightTool;
+    int taskCount; // Counter to keep track of how many tasks are completed
 };
 
-#endif // ROBOT_HPP
+#endif
