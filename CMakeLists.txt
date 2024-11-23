@@ -14,19 +14,11 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
 )
 
- PowerRangersDinoForce
-add_subdirectory(third_party/matplotplusplus)
-add_subdirectory(third_party/glew)
-add_subdirectory(third_party/glfw)
-
-
-
 # add_subdirectory(third_party/matplotplusplus)
 
 list(APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}/third_party/matplotplusplus/install")
 find_package(Matplot++ REQUIRED)
 include(GNUInstallDirs)
- main
 
 file(GLOB all_SRCS
     "${PROJECT_SOURCE_DIR}/include/*.h"
@@ -42,11 +34,7 @@ file(GLOB all_SRCS
 # Header files are not needed in add_executable(), assuming they are properly included.
 add_executable(${CMAKE_PROJECT_NAME} ${all_SRCS})
 
- PowerRangersDinoForce
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC matplot libglew_static glfw)
-
 # target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC matplot)
 target_link_libraries(${CMAKE_PROJECT_NAME} Matplot++::matplot)
 
- main
 # target_link_libraries(${CMAKE_PROJECT_NAME} m)

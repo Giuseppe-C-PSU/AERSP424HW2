@@ -26,7 +26,6 @@ void AirportSimulation::incomingAircraft(std::shared_ptr<Aircraft> aircraft) {
     }
 }
 
-
 void AirportSimulation::atcCommunication() {
     while (true) {
         std::unique_lock<std::mutex> lock(mtx);
@@ -36,7 +35,7 @@ void AirportSimulation::atcCommunication() {
         cv.wait(lock, [this] { return !trafficPattern.empty() || processedAircraft == totalAircraft; });
 
         if (processedAircraft == totalAircraft) {
-            std::cout << "No more airc...  Honk-mimimimi...\n";
+            std::cout << "No more airc...   Honk-mimimimi...\n";
             break;
         }
 
