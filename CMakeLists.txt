@@ -1,5 +1,38 @@
-cmake_minimum_required(VERSION 3.23) # Specify CMake version.
+cmake_minimum_required(VERSION 3.22) # Specify CMake version.
 project(Homework2) # A project name. This can be anything.
-set(CMAKE_CXX_STANDARD 20) # C++ version
-include_directories(${CMAKE_SOURCE_DIR}/include)
-add_executable(Homework2 src/main.cpp src/q1.cpp include/q1.h src/q2.cpp include/q2.h src/airport_simulation.cpp include/airport_simulation.h)
+set(CMAKE_CXX_STANDARD 20) # Specify C++ version.
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+add_compile_definitions(_USE_MATH_DEFINES)
+
+# set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall -Wpedantic -Wextra")
+message(STATUS "CMakeLists.txt is at ${PROJECT_SOURCE_DIR}") # To print something.
+list(APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}/third_party/matplotplusplus/install")
+include(GNUInstallDirs)
+
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src
+)
+
+add_subdirectory(third_party/matplotplusplus)
+add_subdirectory(third_party/glew)
+add_subdirectory(third_party/glfw)
+
+
+
+file(GLOB all_SRCS
+    "${PROJECT_SOURCE_DIR}/include/*.h"
+    "${PROJECT_SOURCE_DIR}/include/*.hpp"
+    "${PROJECT_SOURCE_DIR}/src/*.cpp"
+    "${PROJECT_SOURCE_DIR}/src/*.c"
+)
+
+# Create a binary file. 
+# The first argument is the name of the binary file.
+# It can be anything. In this case, it is set to be the project name.
+# The other arguments are source files.
+# Header files are not needed in add_executable(), assuming they are properly included.
+add_executable(${CMAKE_PROJECT_NAME} ${all_SRCS})
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC matplot libglew_static glfw)
+# target_link_libraries(${CMAKE_PROJECT_NAME} m)

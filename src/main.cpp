@@ -13,6 +13,7 @@ using namespace std;
 
 int main(){
 
+
     cout << "#################################" << endl;
     cout << "START OF QUESTION 1" << endl;
     cout << "#################################" << endl;
@@ -49,7 +50,7 @@ int main(){
     // Create a vector to hold the ranger threads
     vector<thread> rangers;
     // Assigns colors to the Rangers
-    string colors[5] = {"Red", "Blue", "Yellow", "Pink", "Black"}
+    string colors[5] = {"Red", "Blue", "Yellow", "Pink", "Black"};
 
     // Loop to create and start five ranger threads
     for (int i = 0; i < 5; ++i) {
