@@ -21,17 +21,17 @@ void Ranger::performTask() {
         lock(lockLeft, lockRight);
 
         // Print a message indicating the Ranger is grabbing the tools
-        cout << "The" << color << " Ranger is grabbing tools.\n";
+        cout << "The " << color << " Ranger is grabbing tools.\n";
         // Simulate the time taken to grab the tools
         this_thread::sleep_for(std::chrono::seconds(1));
 
         // Print a message indicating the Ranger is performing the task
-        cout << "The" << color << " Ranger is performing the task.\n";
+        cout << "The " << color << " Ranger is performing the task.\n";
         // Simulate the time taken to perform the task
         this_thread::sleep_for(std::chrono::seconds(5));
 
         // Print a message indicating the Ranger has completed the task and released the tools
-        cout << "The" << color << " Ranger has completed the task and released the tools.\n";
+        cout << "The " << color << " Ranger has completed the task and released the tools.\n";
 
         //Increment task counter
         ++taskCount;
